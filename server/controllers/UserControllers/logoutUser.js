@@ -2,7 +2,7 @@ const User = require('../../models/User');
 const UserSession = require('../../models/UserSession');
 
 module.exports = (req, res, next) => {
-
+	
 	const { query } = req;
 	const { token } = query;
 
