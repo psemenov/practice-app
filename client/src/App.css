@@ -21,6 +21,7 @@
 
 html, body {
   height: 100%;
+  border-style: 
 }
 
 body {
@@ -51,8 +52,20 @@ body {
   text-decoration: none;
   color: var(--mainLightGrey) !important;
 }
-.text-grey {
-  color: var(--mainWhite) !important;
+.text-black {
+  color: var(--mainBlack) !important;
+}
+
+.text-darkred {
+  color: var(--mainDarkRed) !important; 
+}
+
+.text-green {
+  color: var(--mainGreen) !important;
+}
+
+.bg-orange {
+  background-color: var(--mainOrange) !important;
 }
 
 .search-input {

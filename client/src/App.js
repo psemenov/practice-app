@@ -8,7 +8,6 @@ import Default from './components/Default';
 import ProductList from './components/Products/ProductList';
 import SignIn from './components/User/SignIn';
 import Cart from './components/Cart/Cart';
-import Footer from './components/Footer';
 
 class App extends Component {
   render() {

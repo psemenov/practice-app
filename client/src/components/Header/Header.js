@@ -83,7 +83,7 @@ export default class Header extends React.Component {
 
 const NavWrapper = styled.nav`
 	background-color: var(--mainBlack) !important;
-
+	
 	@media (max-width: 767px) {
 		.nav-item {
 			background-color: var(--mainLightBlack) !important;
@@ -94,6 +94,7 @@ const NavWrapper = styled.nav`
 		.nav-item a {
 			padding-left: 1rem;
 		}
+
 	}
 
 	.nav-link {
