@@ -60,7 +60,6 @@ const FilterWrapper = styled.div`
 	}
 	
 	.filter-btn:focus, .filter-btn:active {
-		box-shadow: none !important;
 		background-color: var(--mainGrey) !important;
 	}
 

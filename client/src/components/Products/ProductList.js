@@ -1,42 +1,54 @@
-import React, { Component } from 'react';
+import React, { Component, useContext} from 'react';
 import Product from './Product';
 import Filter from './Filter';
 import styled from 'styled-components';
-// {this.props.match.params.category}
-// 				{this.props.match.params.type ? this.props.match.params.type : "default"}
-export default class ProductList extends Component {
-	render() {
-		return (
+import {ProductConsumer, ProductContext} from '../../productContext';
+import { Redirect } from 'react-router-dom';
+import Default from '../Default';
+
+export default function ProductList(props) {
+	//get params
+	let {category, type} = props.match.params;
+	if(!type) type = "none";
+	//not match
+	// const isProductPathActive = !!matchPath(
+ //    this.props.location.pathname, 
+ //    '/products/' + category + (type !== "none" ? '/' + type : "")
+ //  ); 
+	const contextValue = useContext(ProductContext);
+	const title = contextValue.getTitle(category, type);
+	console.log(title);
+	return (
+		<React.Fragment>
+			{title === "unknown" ? <Default /> : 
 			<div className="container-fluid">
 				<div className="row p-3">
-					<h2 className="text-center w-100">Bass Guitars</h2>
+					<h2 className="text-center w-100">{title}</h2>
 				</div>
 				<div className="row mt-2">
 					<Filter />
 					<div className="col-xl-10 col-lg-9 col-md-8 list">
 						<ListWrapper>
-							<div className="container-fluid">
+							<div className="col">
 								<div className="row">
-									<Product />
-									<Product />
-									<Product />
-									<Product />
-									<Product />
-									<Product />
-									<Product />
-									<Product />							
-									<Product />
-									<Product />
-									<Product />
-									<Product />
+									<ProductConsumer>
+		                {(value) => {
+											let tempProducts = value.getByCategoryAndType(category, type);
+		                  if(tempProducts.length > 0)
+		                  return tempProducts.map(product => {
+		                    return <Product key={product.id} product={product} />
+		                  })
+		                }}
+	            		</ProductConsumer>
 								</div>
 							</div>
 						</ListWrapper>
 					</div>			
 				</div>
-			</div>
-		);
-	}
+			</div>}
+		</React.Fragment>
+		
+	);
 }
 
 

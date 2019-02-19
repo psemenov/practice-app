@@ -158,7 +158,7 @@ export const headerLinks = {
 		},
 		{
 			id: 8,
-			linkTitle: 'pass pedal accessories',
+			linkTitle: 'bass pedal accessories',
 			category: 'accessories',
 			type: 'pedal-accessories'
 		}

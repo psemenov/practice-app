@@ -68,6 +68,10 @@ body {
   background-color: var(--mainOrange) !important;
 }
 
+.btn:focus, .btn:active {
+  box-shadow: none !important;
+}
+
 .search-input {
   background-color: var(--mainDarkWhite) !important;
   border-top-left-radius: 0.5rem !important;
@@ -87,7 +91,6 @@ body {
 
 .search-button:focus  {
   outline: none;
-  box-shadow: none !important;
 }
 
 .search-button:active {
