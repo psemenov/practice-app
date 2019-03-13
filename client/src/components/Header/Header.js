@@ -24,7 +24,7 @@ export default class Header extends React.Component {
 					<div className="row align-items-md-center">
 						<div className="header-logo col-md-3 col-6 mb-3 ">
 							<Link to="/">
-								<img src={logo} alt="the bass store" />
+								<img src={logo} className="logo-img" alt="the bass store" />
 							</Link>
 						</div>
 						<Search id="search-md" />

@@ -1,4 +1,3 @@
- 
 export const storeProducts = [
 	{
     id: 1,
@@ -119,3 +118,45 @@ export const typeTitles = [
     title: "Left Handed"
   },
 ];
+
+export function getProductFromStorage(key) {
+  if (!key) {
+    return null;
+  }
+
+  try {
+    const valueStr = window.localStorage.getItem(key);
+    if (valueStr) {
+      return JSON.parse(valueStr);
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+}
+
+export function setProductInStorage(key, obj) {
+  if (!key) {
+    console.err("Error: key is missing");
+  }
+
+  try {
+    if (getProductFromStorage(key) == null)
+      Object.assign(obj, {ordered: 1});
+    window.localStorage.setItem(key, JSON.stringify(obj));
+  } catch (err) {
+    console.err(err);
+  }
+}
+
+export function removeProductFromStorage(key) {
+  if (!key) {
+    console.err("Error: key is missing");
+  }
+
+  try {
+    window.localStorage.removeItem(key);
+  } catch (err) {
+    console.err(err);
+  }
+}

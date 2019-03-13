@@ -156,3 +156,38 @@ body {
   color: var(--mainGrey) !important;
   font-size: 1.5rem;
 }
+
+@media (min-width: 992px) {
+  .logo-img, .navbar-nav {
+    margin-left: 5rem !important;
+  }
+
+  .info-container {
+    margin: 1rem 7rem 1rem 7rem !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .logo-img, .navbar-nav, .filter {
+    margin-left: 2rem !important;
+  }
+
+  .info-container {
+    margin: 1rem 4rem 1rem 4rem !important;
+    font-size: 1.3rem;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .logo-img, .navbar-nav {
+    margin-left: 0 !important;
+  }
+
+  .info-container {
+    margin: 1rem 0 1rem 0 !important;
+    font-size: 1.3rem;
+  }
+
+}
+

@@ -7,14 +7,9 @@ import { Redirect } from 'react-router-dom';
 import Default from '../Default';
 
 export default function ProductList(props) {
-	//get params
 	let {category, type} = props.match.params;
 	if(!type) type = "none";
-	//not match
-	// const isProductPathActive = !!matchPath(
- //    this.props.location.pathname, 
- //    '/products/' + category + (type !== "none" ? '/' + type : "")
- //  ); 
+
 	const contextValue = useContext(ProductContext);
 	const title = contextValue.getTitle(category, type);
 	console.log(title);
@@ -25,9 +20,9 @@ export default function ProductList(props) {
 				<div className="row p-3">
 					<h2 className="text-center w-100">{title}</h2>
 				</div>
-				<div className="row mt-2">
+				<div className="product-list row ml-md-3 ml-lg-5 mt-2">
 					<Filter />
-					<div className="col-xl-10 col-lg-9 col-md-8 list">
+					<div className="col-lg-9 col-md-8 list mr-md-3 mr-lg-3">
 						<ListWrapper>
 							<div className="col">
 								<div className="row">

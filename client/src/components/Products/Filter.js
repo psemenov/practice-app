@@ -10,7 +10,8 @@ export default class Filter extends Component {
 	}
 
   componentDidMount() {
-  	window.addEventListener("resize", this.resize);
+  	//this.resize();
+  	//window.addEventListener("resize", this.resize);
   }
     
 
@@ -33,18 +34,18 @@ export default class Filter extends Component {
 	render() {
 		console.log(this.state.x);
 		return (
-			<div className="col-xl-2 col-md-3 ml-4 mt-3 mx-auto">
-						<FilterWrapper className="filter text-capitalize">
-							<div className="filter-title">		
-								<h3 className="d-none d-md-block text-center">filter</h3>					
-								<button className="btn btn-block filter-btn d-md-none" type="button" data-toggle="collapse" data-target="#filterCollapse" 
-								aria-expanded="false" aria-controls="filterCollapse">Filter</button>		
-							</div>
-							<div className={"filter-body collapse " + this.state.show} id="filterCollapse">
-								<FilterBody />
-							</div>
-						</FilterWrapper>
-					</div>	
+			<div className="filter d-none d-md-block col-md-3 col-lg-2 ml-4 mt-3 mx-auto ">
+				<FilterWrapper className="text-capitalize">
+					<div className="filter-title">		
+						<h3 className="d-none d-md-block text-center">filter</h3>					
+						<button className="btn btn-block filter-btn d-md-none" type="button" data-toggle="collapse" data-target="#filterCollapse" 
+						aria-expanded="false" aria-controls="filterCollapse">Filter</button>		
+					</div>
+					<div className={"filter-body collapse " + this.state.show} id="filterCollapse">
+						<FilterBody />
+					</div>
+				</FilterWrapper>
+			</div>	
 		);
 	}
 }
