@@ -2,7 +2,7 @@ import React, { Component, useContext} from 'react';
 import Product from './Product';
 import Filter from './Filter';
 import styled from 'styled-components';
-import {ProductConsumer, ProductContext} from '../../productContext';
+import {MainConsumer, context} from '../../context';
 import { Redirect } from 'react-router-dom';
 import Default from '../Default';
 
@@ -10,7 +10,7 @@ export default function ProductList(props) {
 	let {category, type} = props.match.params;
 	if(!type) type = "none";
 
-	const contextValue = useContext(ProductContext);
+	const contextValue = useContext(context);
 	const title = contextValue.getTitle(category, type);
 	console.log(title);
 	return (
@@ -26,7 +26,7 @@ export default function ProductList(props) {
 						<ListWrapper>
 							<div className="col">
 								<div className="row">
-									<ProductConsumer>
+									<MainConsumer>
 		                {(value) => {
 											let tempProducts = value.getByCategoryAndType(category, type);
 		                  if(tempProducts.length > 0)
@@ -34,7 +34,7 @@ export default function ProductList(props) {
 		                    return <Product key={product.id} product={product} />
 		                  })
 		                }}
-	            		</ProductConsumer>
+	            		</MainConsumer>
 								</div>
 							</div>
 						</ListWrapper>

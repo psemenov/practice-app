@@ -18,6 +18,6 @@ app.get('/', (req, res) => {
 // API routes
 require('./routes')(app);
 
-app.listen(8080, () => {
-    console.log('App is running on port 8080');
+app.listen(5000, () => {
+    console.log('App is running on port 5000');
 });

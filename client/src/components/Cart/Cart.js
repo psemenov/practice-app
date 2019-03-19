@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {ProductConsumer} from '../../productContext';
+import {MainConsumer} from '../../context';
 import CartList from './CartList';
 import EmptyCart from './EmptyCart';
 
@@ -7,7 +7,7 @@ export default class Cart extends Component {
 	render () {
 		return (
 		  <section>
-		  	<ProductConsumer>
+		  	<MainConsumer>
 		  		{value => {
 		  			const {cart} = value;
 		  			if(cart.length > 0) {
@@ -22,7 +22,7 @@ export default class Cart extends Component {
       				);
       			}
 		  		}}
-		  	</ProductConsumer>
+		  	</MainConsumer>
 				
 		  </section>
 		)

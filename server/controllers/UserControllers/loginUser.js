@@ -1,6 +1,8 @@
 const User = require('../../models/User');
 const UserSession = require('../../models/UserSession');
-
+function validateEmail(email) {
+    return 
+}
 module.exports = (req, res, next) => {
 
   const { body } = req;
@@ -15,14 +17,14 @@ module.exports = (req, res, next) => {
   if(!email) {
     return res.send({
       success: false,
-      message: 'Error: Email cannot be blank'
+      message: 'Email cannot be blank'
     });
   }
 
   if(!password) {
     return res.send({
       success: false,
-      message: 'Error: Password cannot be blank'
+      message: 'Password cannot be blank'
     });
   }
 
@@ -38,7 +40,7 @@ module.exports = (req, res, next) => {
     if (users.length != 1) {
     	return res.send({
         success: false,
-        message: 'Error: Invalid email'
+        message: 'Invalid email'
       });
     }
 
@@ -46,7 +48,7 @@ module.exports = (req, res, next) => {
     if (!user.validPassword(password)){
     	return res.send({
         success: false,
-        message: 'Error: Invalid password'
+        message: 'Invalid password'
       });
     }
 
@@ -62,7 +64,7 @@ module.exports = (req, res, next) => {
       }
       return res.send({
         success: true,
-        message: 'Valid Sign In',
+        message: '',
         token: doc._id
       });
       

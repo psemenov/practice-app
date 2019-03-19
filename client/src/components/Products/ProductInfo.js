@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {ProductConsumer, ProductContext} from '../../productContext';
+import {MainConsumer, context} from '../../context';
 
 export default function ProductInfo(props) {
 	const {id, title, img, price, info, amount} = props.product;
@@ -25,7 +25,7 @@ export default function ProductInfo(props) {
 									: <p className="not-in-stock">Not in stock</p>}
 								<p>Product description:</p>
 								<p className="description">{info}</p>
-								<ProductConsumer>
+								<MainConsumer>
 					        {(value) => (
 										<Link to="/cart" className="add-link" onClick={() => value.addToCart(id)}>
 											<div className="add-btn p-3">
@@ -34,7 +34,7 @@ export default function ProductInfo(props) {
 											</div>
 										</Link>		
 					        )}
-					  		</ProductConsumer>
+					  		</MainConsumer>
 								
 							</div>
 						</div>

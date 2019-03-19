@@ -6,7 +6,7 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import Main from './components/Main';
 import Default from './components/Default';
 import ProductList from './components/Products/ProductList';
-import SignIn from './components/User/SignIn';
+import Account from './components/User/Account';
 import Cart from './components/Cart/Cart';
 import Details from './components/Products/Details';
 
@@ -17,7 +17,7 @@ class App extends Component {
         <HeaderContainer />
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route path="/signIn" component={SignIn} />
+          <Route path="/account" component={Account} />
           <Route path="/cart" component={Cart} />
           <Route path="/products/:category/:type?" component={ProductList} />
           <Route path="/details/:category/:id" component={Details} />

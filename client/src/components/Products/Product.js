@@ -3,19 +3,19 @@ import {Link} from 'react-router-dom'
 import styled from 'styled-components';
 
 export default function Product(props) {
-	const {id, title, category, img, price, amount} =  props.product;
+	const {_id, title, category, img, price, amount} =  props.product;
 	const linkPath = title;
 	return(
 		<ProductWrapper className="col-md-6 col-lg-4 col-xl-3 p-3 ">
 			<div className="card text-capitalize"> 
 				<div className="img-container p-0">
-					 <Link to={"/details/" + category + "/" + id}>
+					 <Link to={"/details/" + category + "/" + _id}>
 					 		<img src={img} alt="product" className="card-img-top" />
 					 </Link>
 				</div>
 				<div className="card-body px-3 py-1">
 					<div className="card-title">
-						<Link to={"/details/" + category + "/" + id} className="card-link text-black text-center ">
+						<Link to={"/details/" + category + "/" + _id} className="card-link text-black text-center ">
 	            {title}
 	          </Link>
 					</div>

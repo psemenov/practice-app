@@ -38,8 +38,6 @@ export default class Filter extends Component {
 				<FilterWrapper className="text-capitalize">
 					<div className="filter-title">		
 						<h3 className="d-none d-md-block text-center">filter</h3>					
-						<button className="btn btn-block filter-btn d-md-none" type="button" data-toggle="collapse" data-target="#filterCollapse" 
-						aria-expanded="false" aria-controls="filterCollapse">Filter</button>		
 					</div>
 					<div className={"filter-body collapse " + this.state.show} id="filterCollapse">
 						<FilterBody />

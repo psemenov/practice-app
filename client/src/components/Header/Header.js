@@ -5,6 +5,7 @@ import logo from '../../logo.svg';
 import Dropdown from './Dropdown';
 import Search from './Search';
 import {headerLinks} from '../../headerLinks';
+import {MainConsumer} from '../../context';
 
 export default class Header extends React.Component {
 	state = {
@@ -30,8 +31,14 @@ export default class Header extends React.Component {
 						<Search id="search-md" />
 						<div className="header-link-group col-lg-2 col-md-3 col-5 col-sm-4 offset-lg-1 offset-md-0 offset-sm-2 offset-1">
 							<div className="header-link mr-4">
-								<Link to="/signin">
-									<i className="fas fa-sign-in-alt header-link-icon"></i>
+								<Link to="/account">
+									<MainConsumer>
+			                {(value) => {
+												let {token} = value;
+												if(token.length > 0) return <i class="fas fa-user header-link-icon"></i>
+												return <i className="fas fa-sign-in-alt header-link-icon"></i>
+			                }}
+		            		</MainConsumer>
 								</Link>
 							</div>
 						

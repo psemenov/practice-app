@@ -14,7 +14,7 @@ export default class FilterBody extends React.Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 
-	handleClick(event){
+	handleClick(event) {
 		console.log(event.target.id);
 		const {id} = event.target;
 		this.setState(prevState => {
@@ -28,8 +28,8 @@ export default class FilterBody extends React.Component {
 			<div>
 				<div className="filter-box p-2">
 					<div className="box-header d-flex justify-content-between">
-						<p className="align-self-center">sort by</p>
-						<button className="btn p-1 btn-collapse " name="button1" type="button" data-toggle="collapse" 
+						<label for="button1" className="align-self-center">sort by</label>
+						<button className="btn p-1 btn-collapse" id="button1" name="button1" type="button" data-toggle="collapse" 
 						data-target="#collapse1">
 							{this.state.collapse1 ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}
 						</button>
@@ -55,8 +55,8 @@ export default class FilterBody extends React.Component {
 				</div>
 				<div className="filter-box p-2">
 					<div className="box-header d-flex justify-content-between">
-						<p className="align-self-center">availability</p>
-						<button className="btn p-1 btn-collapse" name="button2" type="button" data-toggle="collapse" 
+						<label for="button2" className="align-self-center">availability</label>
+						<button className="btn p-1 btn-collapse" id="button2" name="button2" type="button" data-toggle="collapse" 
 						data-target="#collapse2">
 							{this.state.collapse2 ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}
 						</button>
@@ -70,8 +70,8 @@ export default class FilterBody extends React.Component {
 				</div>
 				<div className="filter-box p-2">
 					<div className="box-header d-flex justify-content-between">
-						<p className="align-self-center">bass guitar types</p>
-						<button className="btn p-1 btn-collapse" name="button3" type="button" data-toggle="collapse" 
+						<label for="button3" className="align-self-center">bass guitar types</label>
+						<button className="btn p-1 btn-collapse" id="button3" name="button3" type="button" data-toggle="collapse" 
 						data-target="#collapse3" >
 							{this.state.collapse3 ? <i className="fas fa-minus"></i> : <i className="fas fa-plus"></i>}
 						</button>
@@ -88,8 +88,7 @@ export default class FilterBody extends React.Component {
 					</div>
 				</div>
 				<div className="filter-box p-2 no-bb">
-					<button type="button" className="btn btn-block show-btn" 
-					data-toggle="collapse" data-target="#filterCollapse">Show Products</button>
+					<button type="button" className="btn btn-block show-btn" >Show Products</button>
 				</div>
 			</div>
 			

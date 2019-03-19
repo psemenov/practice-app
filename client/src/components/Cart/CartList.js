@@ -1,6 +1,7 @@
 import React from 'react';
 import CartItem from './CartItem';
 import styled from 'styled-components';
+import CartTotals from './CartTotals';
 
 export default function CartList({value}) {
 	const {cart} = value;
@@ -10,13 +11,14 @@ export default function CartList({value}) {
 			<div className="container-fluid">
 				<div className="info-container p-4">
 					<div className="title-container">
-						<p className="ml-3">Your Cart</p>
+						<p className="ml-sm-3">Your Cart</p>
 					</div>
 					{cart.map(item => {
 						return (
 							<CartItem key={item.id} item={item} value={value} />
 						);
 					})}	
+					<CartTotals value={value} />
 				</div>	
 			</div>
 		</CartListWrapper>

@@ -4,43 +4,77 @@ import {
   typeTitles, 
   categoryTitles, 
   setProductInStorage, 
-  getProductFromStorage,
-  removeProductFromStorage
+  getFromStorage,
+  removeProductFromStorage,
+  setUserInStorage
 } from './data';
 
-export const ProductContext = React.createContext();
+const apiPath = "http://localhost:5000";
 
-class ProductProvider extends React.Component {
+export const context = React.createContext();
+
+class MainProvider extends React.Component {
 	state = {
     products: [],
-    cart: []
+    cart: [],
+    cartTotal: 0,
+    token: ''
   }
 
   componentDidMount() {
+    const obj = getFromStorage('user_token');
+    if(obj) {
+      const {token} = obj;
+      if (token) {
+        fetch(apiPath + '/api/account/verify?token=' + token) 
+          .then(res => res.json())
+          .then(json => {
+            if(json.success) {
+              this.setState({
+                token: token
+              });
+            }
+          });
+      }
+    }
     this.setProducts();
     this.getCart();
   }
 
+    someMethod() {
+      const tok = this.state.token;
+      this.setState(() => {
+      return {token: tok}
+    });    }
+
   setProducts = () => {
     let tempProducts = [];
-    storeProducts.forEach(item => {
-      const singleItem = {...item};
-      tempProducts = [...tempProducts, singleItem];
-    });
-    this.setState(() => {
-      return {products: tempProducts}
-    });
+    fetch(apiPath + '/api/product/get_all') 
+      .then(res => res.json())
+      .then(json => {
+        if(json.success) {
+          json.products.forEach(item => {
+            const singleItem = {...item};
+            tempProducts = [...tempProducts, singleItem];
+          });
+          this.setState(() => {
+            return {products: tempProducts}
+          });
+       }
+     });
   }
 
   getCart = () => {
     let tempProducts = [];
     for ( var i = 0, len = localStorage.length; i < len; ++i ) {
-        const singleItem = getProductFromStorage(localStorage.key(i));
+        const singleItem = getFromStorage(localStorage.key(i));
         tempProducts = [...tempProducts, singleItem];
     }
     this.setState(() => {
       return {cart: tempProducts}
-    });    
+    }, () => {
+      this.addTotals();
+      });    
   }
 
   getItem = id => {
@@ -50,7 +84,7 @@ class ProductProvider extends React.Component {
 
   getByCategoryAndType(category, type) {
     let tempProducts = [];
-    storeProducts.forEach(item => {
+    this.products.forEach(item => {
       const singleItem = {...item};
       if (singleItem.category === category) {
         singleItem.type.forEach(itemType => {
@@ -64,8 +98,9 @@ class ProductProvider extends React.Component {
   getById(id) {
     let tempProduct = {};
     const BreakException = {};
-    storeProducts.forEach(item => {
-      if (item.id === id) {
+
+    this.products.forEach(item => {
+      if (item._id === id) {
         tempProduct = JSON.parse(JSON.stringify(item));
       }
     });
@@ -104,12 +139,14 @@ class ProductProvider extends React.Component {
     // localStorage.clear();
     let tempProducts = [...this.state.products];
     const index = tempProducts.indexOf(this.getItem(id));
-    if(getProductFromStorage(id) !== null) {
+    if(getFromStorage(id) !== null) {
       this.increment(id);
     } else {
       setProductInStorage(id, tempProducts[index]);
       this.setState(() => {
-        return { products: tempProducts, cart: [...this.state.cart, getProductFromStorage(id)]};
+        return { products: tempProducts, cart: [...this.state.cart, getFromStorage(id)]};
+      }, () => {
+      this.addTotals();
       });
     }
   }
@@ -123,7 +160,7 @@ class ProductProvider extends React.Component {
     if(product.amount === product.ordered) return;
     product.ordered = product.ordered + 1;
 
-    const tempProduct = getProductFromStorage(id);
+    const tempProduct = getFromStorage(id);
     tempProduct.ordered++;
     setProductInStorage(id, tempProduct);
 
@@ -131,7 +168,10 @@ class ProductProvider extends React.Component {
       return {
         cart: [...tempCart]
       }
-    });
+    }, () => {
+      this.addTotals();
+      }
+    );
   }
 
   decrement = id => {
@@ -143,7 +183,7 @@ class ProductProvider extends React.Component {
     if(product.ordered === 1) return; 
     product.ordered = product.ordered - 1;
 
-    const tempProduct = getProductFromStorage(id);
+    const tempProduct = getFromStorage(id);
     tempProduct.ordered--;
     setProductInStorage(id, tempProduct);
 
@@ -151,7 +191,10 @@ class ProductProvider extends React.Component {
       return {
         cart: [...tempCart]
       }
-    });  
+    }, () => {
+      this.addTotals();
+      }
+    );  
   }
 
    removeItem = id => {
@@ -163,10 +206,9 @@ class ProductProvider extends React.Component {
       return {
         cart: [...tempCart]
       }
-    }
-    // , () => {
-    //   this.addTotals();
-    // }
+    }, () => {
+      this.addTotals();
+      }
     );
   }
 
@@ -179,24 +221,19 @@ class ProductProvider extends React.Component {
   //   });
   // }
 
-//  addTotals = () => {
-    // let subTotal = 0;
-    // this.state.cart.map(item => {subTotal += item.total});
-    // const tempTax = subTotal * 0.1;
-    // const tax = parseFloat(tempTax.toFixed(2));
-    // const total = subTotal + tax;
-    // this.setState(() => {
-    //   return ({
-    //     cartSubTotal: subTotal,
-    //     cartTax: tax,
-    //     cartTotal: total
-    //   });
-    // }); 
-//  }
+ addTotals = () => {
+    let total = 0;
+    this.state.cart.map(item => {total += item.price * item.ordered});
+    this.setState(() => {
+      return ({
+        cartTotal: total
+      });
+    }); 
+ }
 
   render () {
     return (
-      <ProductContext.Provider value={{
+      <context.Provider value={{
         ...this.state,
         getByCategoryAndType: this.getByCategoryAndType,
         getById: this.getById,
@@ -204,17 +241,18 @@ class ProductProvider extends React.Component {
         addToCart: this.addToCart,
         increment: this.increment,
         decrement: this.decrement,
-        removeItem: this.removeItem
+        removeItem: this.removeItem,
+        someMethod: this.someMethod
       }}>
         {this.props.children}
-      </ProductContext.Provider>
+      </context.Provider>
     );
 
   }
 }
 
 
-const ProductConsumer = ProductContext.Consumer;
+const MainConsumer = context.Consumer;
 
-export {ProductProvider, ProductConsumer};
+export {MainProvider, MainConsumer};
 

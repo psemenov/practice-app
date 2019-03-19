@@ -119,7 +119,7 @@ export const typeTitles = [
   },
 ];
 
-export function getProductFromStorage(key) {
+export function getFromStorage(key) {
   if (!key) {
     return null;
   }
@@ -141,7 +141,7 @@ export function setProductInStorage(key, obj) {
   }
 
   try {
-    if (getProductFromStorage(key) == null)
+    if (getFromStorage(key) == null)
       Object.assign(obj, {ordered: 1});
     window.localStorage.setItem(key, JSON.stringify(obj));
   } catch (err) {
@@ -156,6 +156,19 @@ export function removeProductFromStorage(key) {
 
   try {
     window.localStorage.removeItem(key);
+  } catch (err) {
+    console.err(err);
+  }
+}
+
+
+export function setUserInStorage(key, obj) {
+  if (!key) {
+    console.err("Error: key is missing");
+  }
+
+  try {
+    window.localStorage.setItem(key, JSON.stringify(obj));
   } catch (err) {
     console.err(err);
   }
