@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import {MainConsumer, context} from '../../context';
 
 export default function ProductInfo(props) {
-	const {id, title, img, price, info, amount} = props.product;
+	const {_id, title, img, price, info, amount} = props.product;
 	return(
 		<InfoWrapper>
 			<div className="container-fluid">
@@ -27,7 +27,7 @@ export default function ProductInfo(props) {
 								<p className="description">{info}</p>
 								<MainConsumer>
 					        {(value) => (
-										<Link to="/cart" className="add-link" onClick={() => value.addToCart(id)}>
+										<Link to="/cart" className="add-link" onClick={() => value.addToCart(_id)}>
 											<div className="add-btn p-3">
 												<i className="fas fa-shopping-cart"></i>
 												&ensp;Add to cart

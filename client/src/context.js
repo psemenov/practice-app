@@ -78,7 +78,7 @@ class MainProvider extends React.Component {
   }
 
   getItem = id => {
-    const product = this.state.products.find(item => item.id === id);
+    const product = this.state.products.find(item => item._id === id);
     return product;
   }
 
@@ -153,7 +153,7 @@ class MainProvider extends React.Component {
 
   increment = id => {
     let tempCart = [...this.state.cart];
-    const selectedProduct = tempCart.find(item => item.id === id);
+    const selectedProduct = tempCart.find(item => item._id === id);
 
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
@@ -176,7 +176,7 @@ class MainProvider extends React.Component {
 
   decrement = id => {
     let tempCart = [...this.state.cart];
-    const selectedProduct = tempCart.find(item => item.id === id);
+    const selectedProduct = tempCart.find(item => item._id === id);
 
     const index = tempCart.indexOf(selectedProduct);
     const product = tempCart[index];
@@ -199,7 +199,7 @@ class MainProvider extends React.Component {
 
    removeItem = id => {
     let tempCart = [...this.state.cart];
-    tempCart = tempCart.filter(item => item.id !== id);
+    tempCart = tempCart.filter(item => item._id !== id);
     removeProductFromStorage(id);
 
     this.setState(() => {

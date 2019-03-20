@@ -7,6 +7,9 @@ const createUserController = require('../../controllers/UserControllers/createUs
 const loginUserController = require('../../controllers/UserControllers/loginUser');
 const verifyTokenController = require('../../controllers/UserControllers/verifyToken');
 const logoutUserController = require('../../controllers/UserControllers/logoutUser');
+const getUserController = require('../../controllers/UserControllers/getUser');
+const updateInfoController = require('../../controllers/UserControllers/updateUserInfo');
+const changePasswordController = require('../../controllers/UserControllers/changePassword');
 
 module.exports = (app) => {
 
@@ -22,5 +25,14 @@ app.get('/api/account/verify', verifyTokenController);
 //Sign out
 app.get('/api/account/logout', logoutUserController);
 
+//Get user info
+app.get('/api/account/getinfo', getUserController);
 	
+//Update user info
+app.post('/api/account/update_user', updateInfoController);
+
+//Change password
+app.post('/api/account/change_password', changePasswordController);
+
+
 };

@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
 export default function CartItem({item, value}) {
-	const {id, title, category, img, price, ordered} = item;
+	const {_id, title, category, img, price, ordered} = item;
 	const {increment, decrement, removeItem} = value;
 	return (
 		<CartItemWrapper>
 			<div className="row d-flex align-items-center my-4">
 				<div className="col-4 col-sm-3 mx-auto col-lg-2">
-					<Link to={"/details/" + category + "/" + id}>
+					<Link to={"/details/" + category + "/" + _id}>
 						<img src={img} className="cart-img ml-lg-5 ml-sm-3" alt=""/>
 					</Link>
 				</div>
 				<div className="col-8 col-sm-9 mx-auto col-lg-4">
-					<Link to={"/details/" + category + "/" + id}  className="title-link">
+					<Link to={"/details/" + category + "/" + _id}  className="title-link">
 						<span>{title}</span>
 					</Link>
 				</div>
@@ -23,13 +23,13 @@ export default function CartItem({item, value}) {
 				</div>
 				<div className="col-7 col-sm-2 mx-sm-auto col-lg-2 my-2 my-lg-0">
 					<div className="d-flex justify-content-center">
-						<span className="btn" onClick={() => decrement(id)}><i class="fas fa-minus"></i></span>
+						<span className="btn" onClick={() => decrement(_id)}><i class="fas fa-minus"></i></span>
 						<span className="btn">{ordered}</span>
-						<span className="btn" onClick={() => increment(id)}><i class="fas fa-plus"></i></span>
+						<span className="btn" onClick={() => increment(_id)}><i class="fas fa-plus"></i></span>
 					</div>
 				</div>
 				<div className="col-2 col-sm-2 mx-sm-auto col-lg-2">
-					<span className="btn" onClick={() => removeItem(id)}><i class="fas fa-trash"></i></span>
+					<span className="btn" onClick={() => removeItem(_id)}><i class="fas fa-trash"></i></span>
 				</div>
 			</div>
 		</CartItemWrapper>
